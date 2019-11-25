@@ -5,12 +5,12 @@ window.onload = function() {
     console.log(patients)
     
     patients.forEach(function(elem){
-        elem.addEventListener('touchstart', function(evt) {
+        elem.addEventListener('click', function(evt) {
             window.location.href = "succes.html";
             console.log("test");
         })
     })
-    document.getElementById('backButton').addEventListener('touchstart', function() {
+    document.getElementById('backButton').addEventListener('click', function() {
         window.location.href = "index.html";
     });
 }
