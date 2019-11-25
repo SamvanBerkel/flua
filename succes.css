@@ -1,0 +1,29 @@
+body {
+    height: 100%;
+    background-color: #3CB371;
+}
+
+p {
+    font-family: Arial;
+    font-size: 3em;
+    text-align: center;
+    color: white;
+    margin-top: 400px;
+}
+
+#backButton {
+    width: 130px;
+    height: 60px;
+    background-color: #555555;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    border-radius: 20px;
+}
+
+#backButtonText {
+    vertical-align: middle;
+    line-height: 60px;
+    font-family: Arial;
+    font-size: 1.4em;
+}

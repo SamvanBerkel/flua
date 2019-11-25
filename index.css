@@ -13,7 +13,7 @@ body {
 }
 
 header {
-    height: 100px;
+    height: 80px;
     background-color: var(--main-color);
 }
 
@@ -23,7 +23,7 @@ header, h1 {
     font-family: Arial;
     font-size: 1.4em;
     vertical-align: middle;
-    line-height: 100px;
+    line-height: 80px;
 }
 
 #divPatientList {
@@ -36,7 +36,7 @@ header, h1 {
     width: 100%;
     margin-bottom: 20px;
     background-color: #f2f2f2;
-    height: 150px;
+    height: 130px;
     display: grid;
     grid-template-columns: 130px auto;
     grid-template-rows: 1fr;
@@ -45,7 +45,7 @@ header, h1 {
 
 .patientIcon {
     grid-column: 1;
-    font-size: 6em;
+    font-size: 5em;
     text-align: center;
     margin-top: 20px;
 }
