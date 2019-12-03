@@ -17,16 +17,7 @@ if(window.page == null) window.page = {
                 intakes: []
             })
             
-            $.ajax({
-                url: page.dbLink,
-                type:"PUT",
-                data: JSON.stringify(page.patientJson.patients),
-                contentType:"application/json; charset=utf-8",
-                dataType:"json",
-                success: function(data, textStatus, jqXHR){
-            
-                }
-            }); 
+            page.rest.uploadCurrentJson(); 
         },
         delPatients: function() {
             $.ajax({
@@ -39,6 +30,32 @@ if(window.page == null) window.page = {
             
                 }
             }); 
+        },
+        setHardwareId: function(patientNumber, hardwareId) {
+            debugger;
+            page.patientJson.forEach(function(patient) {
+                if (patient.hardwareId == hardwareId) {
+                    patient.hardwareId = null;
+                }
+
+                if (patient.patientNumber == patientNumber) {
+                    patient.hardwareId = hardwareId;
+                }
+            });
+
+            page.rest.uploadCurrentJson();
+        },
+        uploadCurrentJson: function() {
+            $.ajax({
+                url: page.dbLink,
+                type:"PUT",
+                data: JSON.stringify(page.patientJson),
+                contentType:"application/json; charset=utf-8",
+                dataType:"json",
+                success: function(data, textStatus, jqXHR){
+                    console.log("Uploaded json to the database")
+                }
+            }); 
         }
     },
     set: {
@@ -47,19 +64,27 @@ if(window.page == null) window.page = {
             page.patientJson.forEach(function(patient) {
                 let patientDiv = document.createElement('div');
                 patientDiv.classList.add('divPatient');
-
+                patientDiv.patient = patient;
                 patientDiv.innerHTML = `
                     <i class="fas fa-user-injured patientIcon"></i>
-                    <p class="patientName">${patient.name}</p>
-                    <p class="patientGender">${patient.gender}</p>
-                    <p class="patientBirthdate">4-7-1984</p>
-                    <p class="patientCity">Delft</p>
-                    <p class="patientWeight">${patient.weight}</p>
+                    <div id="divName" class="infoContainer">
+                        <span class="infoHeader">Naam: </span>
+                        <span>${patient.name}</span>
+                    </div>
+                    <div id="divPatientNumber" class="infoContainer">
+                        <span class="infoHeader">Patient nummer: </span>
+                        <span>${patient.patientNumber}</span>
+                    </div>
+                    <div id="divBirthDate" class="infoContainer">
+                        <span class="infoHeader">Geboorte datum: </span>
+                        <span>${patient.birthdate}</span>
+                    </div>
                 `.trim();
 
                 patientDiv.addEventListener('click', function(evt) {
+                    page.rest.setHardwareId(this.patient.patientNumber, "1");
                     window.location.href = "succes.html";
-                    console.log("test");
+                    
                 })
 
                 document.getElementById('divPatientList').appendChild(patientDiv);
