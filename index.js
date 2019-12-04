@@ -31,8 +31,7 @@ if(window.page == null) window.page = {
                 }
             }); 
         },
-        setHardwareId: function(patientNumber, hardwareId) {
-            debugger;
+        setHardwareId: async function(patientNumber, hardwareId) {
             page.patientJson.forEach(function(patient) {
                 if (patient.hardwareId == hardwareId) {
                     patient.hardwareId = null;
@@ -43,19 +42,23 @@ if(window.page == null) window.page = {
                 }
             });
 
-            page.rest.uploadCurrentJson();
+            await page.rest.uploadCurrentJson();
         },
         uploadCurrentJson: function() {
-            $.ajax({
+            return $.ajax({
                 url: page.dbLink,
                 type:"PUT",
                 data: JSON.stringify(page.patientJson),
                 contentType:"application/json; charset=utf-8",
                 dataType:"json",
                 success: function(data, textStatus, jqXHR){
-                    console.log("Uploaded json to the database")
+                    console.log("Uploaded json to the database");
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("Upload failed");
+                    console.log(errorThrown);
                 }
-            }); 
+            });
         }
     },
     set: {
