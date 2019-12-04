@@ -11,6 +11,11 @@ p {
     margin-top: 200px;
 }
 
+#subtext {
+    margin-top: 20px;
+    font-size: 1.5em;
+}
+
 #buttonContainer {
     position: absolute;
     bottom: 40px;
